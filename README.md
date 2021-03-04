@@ -21,8 +21,8 @@
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
-| product_name        | string     | null: false                    |
-| product_description | text       | null: false                    |
+| name                | string     | null: false                    |
+| description         | text       | null: false                    |
 | category_id         | integer    | null: false                    |
 | product_status_id   | integer    | null: false                    |
 | delivery_fee_id     | integer    | null: false                    |
@@ -36,25 +36,15 @@
 - has_one :order
 - has_one_attached :image
 
-## images テーブル(ActiveStorage)
+## Orders テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| image      | string     | null: false                    |
-| product    | references | null: false, foreign_key: true |
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| product | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :product
-
-## Orders テーブル
-
-| Column  | Type    | Options                        |
-| ------- | ------- | ------------------------------ |
-| user    | integer | null: false, foreign_key: true |
-| product | integer | null: false, foreign_key: true |
-
-### Association
-- belongs_to :products
 - belongs_to :user
 - has_one :address
 
@@ -66,7 +56,7 @@
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
-| building_name | string     | null:                          |
+| building_name | string     |                                |
 | phone_number  | string     | null: false                    |
 | order         | references | foreign_key: true              |
 
