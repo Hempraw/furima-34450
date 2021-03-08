@@ -87,6 +87,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
+      it 'passwordが全角文字では登録できない' do
+        @user.password = 'テストパスワード'
+        @user.password_confirmation = 'テストパスワード'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+      end
       it 'family_nameが全角漢字、ひらがな、カタカナ以外では登録できない' do
         @user.family_name = 'tanaka'
         @user.valid?
@@ -102,7 +108,17 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Family name kana is invalid. Input full-with katakana characters.')
       end
+      it 'family_name_kanaがカタカナ以外の全角文字では登録ができない' do
+        @user.family_name_kana = 'たなか'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Family name kana is invalid. Input full-with katakana characters.')
+      end
       it 'first_name_kanaがカタカナ以外では登録ができない' do
+        @user.first_name_kana = 'tarou'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name kana is invalid. Input full-with katakana characters.')
+      end
+      it 'first_name_kanaがカタカナ以外の全角文字では登録ができない' do
         @user.first_name_kana = 'たろう'
         @user.valid?
         expect(@user.errors.full_messages).to include('First name kana is invalid. Input full-with katakana characters.')
