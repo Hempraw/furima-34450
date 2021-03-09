@@ -57,6 +57,11 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price can't be blank")
       end
+      it 'userが紐づいてなければ出品できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("User must exist")
+      end
       it 'priceが全角数字だと出品できない' do
         @product.price = '５００'
         @product.valid?
