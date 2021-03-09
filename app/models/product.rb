@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  # belongs_to :user
+  belongs_to :user
   has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
     belongs_to :category
@@ -9,4 +9,7 @@ class Product < ApplicationRecord
     belongs_to :shipping_date
 
     validates :category_id, :product_status_id, :delivery_fee_id, :prefecture_id, :shipping_date_id, numericality:{other_than: 1}
+  with_options presence: true do
+    validates :name, :description, :image
+  end
 end
