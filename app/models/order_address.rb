@@ -14,4 +14,5 @@ class OrderAddress
     order = Order.create(user_id: user_id, product_id: product_id)
     Addrss.create(postal_number: postal_number, city: city, house_number: house_number,
                   phone_number: phone_number, prefecture_id: prefecture_id, order_id: order.id)
+  end
 end
