@@ -24,6 +24,9 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    unless @product.order.blank?
+      redirect_to root_path
+    end
   end
 
   def update
