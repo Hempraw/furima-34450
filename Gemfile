@@ -62,3 +62,7 @@ gem 'pry-rails'
 gem 'active_hash'
 gem 'payjp'
 gem 'aws-sdk-s3'
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
